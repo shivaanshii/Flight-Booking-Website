@@ -2,7 +2,7 @@
 
 A sleek and responsive flight booking web application built with **React**, **Vite**, and **Tailwind CSS**. It allows users to search for available flights from selected routes and book tickets easily.
 
-🔗 **Live Demo**: [https://fly-high-shivaanshi.netlify.app](https://fly-high-shivaanshi.netlify.app)
+🔗 **Live Demo**: [https://flyhigh-shivaanshi.netlify.app](https://flyhigh-shivaanshi.netlify.app)
 
 ---
 
