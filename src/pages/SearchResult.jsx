@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { fetchFlights } from "../api/fetchFlights";
 import mockFlights from "../data/mockFlights"; 
 
 function SearchResult() {
@@ -9,7 +8,6 @@ function SearchResult() {
   const navigate = useNavigate();
   const [flights, setFlights] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   function formatTime(dateString) {
     const date = new Date(dateString);
@@ -45,27 +43,9 @@ function SearchResult() {
 
   useEffect(() => {
     if (state?.from && state?.to && state?.date) {
-      async function loadFlights() {
-        try {
-          const result = await fetchFlights(state.from, state.to);
-          if (!result || result.length === 0) {
-            console.warn("Using mock data due to empty API response");
-            const fallbackFlights =  getFallbackFlights(state.from, state.to, state.date);
-            setFlights(fallbackFlights);
-          } else {
-            setFlights(result);
-          }
-        } catch (err) {
-          console.error("API error. Falling back to mock data.", err);
-          const fallbackFlights = getFallbackFlights(state.from, state.to, state.date);
-          setFlights(fallbackFlights);
-          setError(null); 
-        } finally {
-          setLoading(false);
-        }
-      }
-
-      loadFlights();
+      const fallbackFlights =  getFallbackFlights(state.from, state.to, state.date);
+      setFlights(fallbackFlights);
+      setLoading(false);
     }
   }, [state?.from, state?.to, state?.date]);
 
@@ -92,8 +72,6 @@ function SearchResult() {
 
       {loading ? (
         <p className="text-center text-gray-600">Loading flights...</p>
-      ) : error ? (
-        <p className="text-center text-red-500">{error}</p>
       ) : flights.length === 0 ? (
         <p className="text-center text-gray-700">No flights found for your route.</p>
       ) : (

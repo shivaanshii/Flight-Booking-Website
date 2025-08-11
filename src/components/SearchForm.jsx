@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bgImage from "../assets/bgplane.jpg";
 
-
 function SearchForm() {
   const [tripType, setTripType] = useState("round"); 
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
-  const [departure, setDeparture] = useState(null);
-  const [returnDate, setReturnDate] = useState(null);
+  const [departure, setDeparture] = useState("");
+  const [returnDate, setReturnDate] = useState("");
   const [travelClass, setTravelClass] = useState("Economy");
   const navigate = useNavigate();
 
